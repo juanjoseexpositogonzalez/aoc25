@@ -42,9 +42,29 @@ def is_id_invalid(id: int) -> bool:
     id_str = str(id)
     # 2. Calculate the length of the id
     length = len(id_str)
-    if id_str[:length // 2] == id_str[length // 2:]:
-        return True
+    return id_str[:length // 2] == id_str[length // 2:]
+
+def is_another_id_invalid(id: int) -> bool:
+    """
+    Check if the id is invalid.
+
+    Args:
+        id: The id to check if it is invalid.
+
+    Returns:
+        True if the id is invalid, False otherwise.
+    """
+    # 1. For each possible pattern length (from 1 to half the length of the id)
+    id_str = str(id)
+    for pattern_length in range(1, len(id_str) // 2 + 1):
+        # 2. If total length is divisible by pattern length, then check if the pattern is repeated in the id
+        if len(id_str) % pattern_length == 0:
+            pattern = id_str[:pattern_length]
+            if id_str.count(pattern) * pattern == id_str:
+                return True
     return False
+  
+     
 
 def process_ids(input: List[Tuple[int, int]]) -> Dict[str, List[int]]:
     """
@@ -61,7 +81,7 @@ def process_ids(input: List[Tuple[int, int]]) -> Dict[str, List[int]]:
     for start, end in input:
         for candidate in range(start, end + 1):
             key = f"{start}-{end}"
-            if is_id_invalid(candidate):
+            if is_id_invalid(candidate) or is_another_id_invalid(candidate):
                 if key not in results:
                     results[key] = []
                 results[key].append(candidate)        
