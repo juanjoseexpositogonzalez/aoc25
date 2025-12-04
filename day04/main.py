@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Final
+from typing import List, Final, Set, Tuple
 from itertools import product
 
 PAPER_ROLL: Final[str] = '@'
@@ -52,6 +52,8 @@ def count_adjacent_rolls(grid: List[str], i: int, j: int) -> int:
     Returns:
         The number of adjacent rolls.
     """
+    if not grid:
+        return 0
     rows, cols = len(grid), len(grid[0])
     return sum(
         is_paper_roll(grid, i + di, j + dj)
@@ -59,7 +61,7 @@ def count_adjacent_rolls(grid: List[str], i: int, j: int) -> int:
         if 0 <= i + di < rows and 0 <= j + dj < cols
     )
 
-def count_accesible_rolls(grid: List[str]) -> int:
+def count_accessible_rolls(grid: List[str]) -> int:
     """
     Count the number of accessible rolls.
 
@@ -69,6 +71,8 @@ def count_accesible_rolls(grid: List[str]) -> int:
     Returns:
         The number of accessible rolls.
     """
+    if not grid or not grid[0]:
+        return 0
     accesible_rolls: int = 0
     rows, cols = len(grid), len(grid[0])
     for row, col in product(range(rows), range(cols)):
@@ -77,6 +81,49 @@ def count_accesible_rolls(grid: List[str]) -> int:
             if neighbors < MAX_ADJACENT_ROLLS:
                 accesible_rolls += 1
     return accesible_rolls
+
+
+# FUNCIONES PART2
+def get_roll_positions(grid: List[str]) -> Set[tuple[int, int]]:
+    """
+    Get the positions of all paper rolls.
+    """
+    return {
+        (i, j)
+        for i, row in enumerate(grid)
+        for j, c in enumerate(row)
+        if c == PAPER_ROLL
+    }
+
+
+def count_adjacent_rolls_set(rolls: Set[tuple[int, int]], i: int, j: int) -> int:
+    """
+    Count the number of adjacent rolls using the set approach.
+    """
+    return sum(
+        (i + di, j + dj) in rolls
+        for di, dj in DIRECTIONS
+    )
+
+
+def remove_all_accessible(rolls: Set[Tuple[int, int]]) -> int:
+    """
+    Remove all accessible rolls iteratively until none are left.
+    
+    Returns:
+        Total number of rolls removed.
+    """
+    total = 0
+    while True:
+        accessible = {
+            (i, j) for (i, j) in rolls
+            if count_adjacent_rolls_set(rolls, i, j) < MAX_ADJACENT_ROLLS
+        }
+        if not accessible:
+            break
+        rolls -= accessible
+        total += len(accessible)
+    return total
 
 
 def main() -> None:
@@ -90,8 +137,15 @@ def main() -> None:
         None.
     """
     input_data = read_input(Path(INPUT_FILE))
-    accessible_rolls = count_accesible_rolls(input_data)
-    print(accessible_rolls)
+    
+    # Part 1
+    accessible_rolls = count_accessible_rolls(input_data)
+    print(f"Part 1: {accessible_rolls}")
+    
+    # Part 2
+    rolls = get_roll_positions(input_data)
+    total_removed = remove_all_accessible(rolls)
+    print(f"Part 2: {total_removed}")
 
 
 if __name__ == '__main__':
