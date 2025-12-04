@@ -75,7 +75,6 @@ def count_accesible_rolls(grid: List[str]) -> int:
         if is_paper_roll(grid, row, col):
             neighbors: int = count_adjacent_rolls(grid, row, col)
             if neighbors < MAX_ADJACENT_ROLLS:
-                print(f"{row}, {col} has {neighbors} neighbors")            
                 accesible_rolls += 1
     return accesible_rolls
 
