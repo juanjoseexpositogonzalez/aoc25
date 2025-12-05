@@ -97,18 +97,47 @@ def calculate_total_valid_ingredients(ingredients_are_valid: List[bool]) -> int:
     """
     return sum(ingredients_are_valid)
 
+def calculate_total_valid_ingredients_in_ranges(valid_ranges: List[Tuple[int, int]]) -> int:
+    """Calculate the total valid ingredients in the ranges.
+    
+    Args:
+        valid_ranges (List[Tuple[int, int]]): A list of valid ranges.
+    """
+    total_valid_ingredients = 0
+    # 1. Order the ranges by the start of the range
+    valid_ranges.sort(key=lambda x: x[0])    
+    # 2. Initialize first range
+    start, end = valid_ranges[0]
+    # 3. Iterate through the ranges, storing new ranges
+    new_ranges: List[Tuple[int, int]] = []
+    for valid_range in valid_ranges[1:]:        
+        new_start, new_end = valid_range
+        if new_start <= end:
+            end = max(end, new_end)            
+        else:
+            new_ranges.append((start, end))
+            start, end = new_start, new_end
+    # 4. Don't forget to add the last range
+    new_ranges.append((start, end))
+    # 5. Calculate the total valid ingredients in the new ranges
+    for new_range in new_ranges:
+        total_valid_ingredients += new_range[1] - new_range[0] + 1
+    return total_valid_ingredients
+        
+
 def main() -> None:
     """Main function."""
     lines = read_input(Path(INPUT))
     valid_ranges = extract_valid_ranges(lines)
     ingredients_ids = extract_ingredients_ids(lines)
-    print(valid_ranges)
-    print(ingredients_ids)
-    valid_ranges_int = [convert_str_range_to_int_range(valid_range) for valid_range in valid_ranges]
+    valid_ranges_int = [convert_str_range_to_int_range(valid_range) for valid_range in valid_ranges]    
     ingredients_are_valid = determine_if_ingredients_are_valid(ingredients_ids, valid_ranges_int)
-    print(ingredients_are_valid)
+    # Part 1
     total_valid_ingredients = calculate_total_valid_ingredients(ingredients_are_valid)
-    print(total_valid_ingredients)
+    print(f"Part 1: {total_valid_ingredients}")
+    # Part 2
+    total_valid_ingredients_in_ranges = calculate_total_valid_ingredients_in_ranges(valid_ranges_int)
+    print(f"Part 2: {total_valid_ingredients_in_ranges}")
 
 
 if __name__ == "__main__":
