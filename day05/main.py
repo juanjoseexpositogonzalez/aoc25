@@ -102,8 +102,7 @@ def calculate_total_valid_ingredients_in_ranges(valid_ranges: List[Tuple[int, in
     
     Args:
         valid_ranges (List[Tuple[int, int]]): A list of valid ranges.
-    """
-    total_valid_ingredients = 0
+    """    
     # 1. Order the ranges by the start of the range
     valid_ranges.sort(key=lambda x: x[0])    
     # 2. Initialize first range
@@ -120,9 +119,8 @@ def calculate_total_valid_ingredients_in_ranges(valid_ranges: List[Tuple[int, in
     # 4. Don't forget to add the last range
     new_ranges.append((start, end))
     # 5. Calculate the total valid ingredients in the new ranges
-    for new_range in new_ranges:
-        total_valid_ingredients += new_range[1] - new_range[0] + 1
-    return total_valid_ingredients
+  
+    return sum(end - start + 1 for start, end in new_ranges)
         
 
 def main() -> None:
