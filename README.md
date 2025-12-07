@@ -38,6 +38,14 @@ The repository is organized by day, with each challenge in its own directory:
 │   ├── main.py
 │   ├── input.txt
 │   └── test.txt
+├── day06/
+│   ├── main.py
+│   ├── input.txt
+│   └── test.txt
+├── day07/
+│   ├── main.py
+│   ├── input.txt
+│   └── test.txt
 ├── pyproject.toml   # Project configuration
 ├── uv.lock          # Dependency lock file
 └── README.md        # This file
@@ -116,6 +124,12 @@ cd day04 && python main.py
 
 # Run Day 5 solution
 cd day05 && python main.py
+
+# Run Day 6 solution
+cd day06 && python main.py
+
+# Run Day 7 solution
+cd day07 && python main.py
 ```
 
 ### Adding New Challenges
@@ -137,8 +151,8 @@ When starting a new day's challenge:
 | [Day 3](day03/) | ✅ | ✅ | |
 | [Day 4](day04/) | ✅ | ✅ | |
 | [Day 5](day05/) | ✅ | ✅ | |
-| Day 6 | ⬜ | ⬜ | |
-| Day 7 | ⬜ | ⬜ | |
+| [Day 6](day06/) | ✅ | ✅ | |
+| [Day 7](day07/) | ✅ | ✅ | |
 | Day 8 | ⬜ | ⬜ | |
 | Day 9 | ⬜ | ⬜ | |
 | Day 10 | ⬜ | ⬜ | |
