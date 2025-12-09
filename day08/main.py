@@ -114,7 +114,7 @@ def generate_pairs_by_distance(points: List[Point]) -> List[tuple[float, int, in
     pairs.sort(key=lambda x: x[0])
     return pairs
 
-def part_two() -> None:
+def part_two(file: str) -> None:
     """
     Part two of the puzzle.
 
@@ -124,7 +124,7 @@ def part_two() -> None:
     Returns:
         None.
     """
-    file_path = Path(INPUT_FILE)
+    file_path = Path(file)
     lines = read_file(file_path)
     points = parse_input(lines)
     pairs = generate_pairs_by_distance(points)
@@ -146,7 +146,7 @@ def main() -> None:
     """
     Main function to solve the problem.
     """
-    file_path = Path(INPUT_FILE)
+    file_path = Path(TEST_FILE)
     lines = read_file(file_path)
     points = parse_input(lines)
     pairs = generate_pairs_by_distance(points)
@@ -159,7 +159,7 @@ def main() -> None:
     result = math.prod(sizes[:3])
     print(f"Test file - First part: {result}")
 
-    print(f"Input file - Second part: {part_two()}")
+    print(f"Input file - Second part: {part_two(TEST_FILE)}")
 
 
 if __name__ == "__main__":
