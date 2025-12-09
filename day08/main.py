@@ -114,6 +114,34 @@ def generate_pairs_by_distance(points: List[Point]) -> List[tuple[float, int, in
     pairs.sort(key=lambda x: x[0])
     return pairs
 
+def part_two() -> None:
+    """
+    Part two of the puzzle.
+
+    Args:
+        None.
+
+    Returns:
+        None.
+    """
+    file_path = Path(INPUT_FILE)
+    lines = read_file(file_path)
+    points = parse_input(lines)
+    pairs = generate_pairs_by_distance(points)
+    
+    uf = UnionFind(len(points))
+    num_groups = len(points)  # Empezamos con n grupos
+    
+    for _, i, j in pairs:
+        if uf.union(i, j):
+            num_groups -= 1
+            if num_groups == 1:
+                # ¡Esta fue la última conexión!
+                result = points[i].x * points[j].x
+                print(f"Última conexión: {points[i]} y {points[j]}")
+                print(f"Resultado: {result}")
+                break
+
 def main() -> None:
     """
     Main function to solve the problem.
@@ -130,6 +158,8 @@ def main() -> None:
     sizes = sorted(uf.get_sizes(), reverse=True)    
     result = math.prod(sizes[:3])
     print(f"Test file - First part: {result}")
+
+    print(f"Input file - Second part: {part_two()}")
 
 
 if __name__ == "__main__":
