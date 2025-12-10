@@ -62,19 +62,6 @@ class Machine:
         else:
             return -1  # Sin solución
 
-    def parse(self, tokens: List[str]) -> None:
-        """Parse the tokens and update the machine state."""
-        # Primer token: [.##.] -> estado objetivo
-        lights_str = tokens[0].strip('[]')
-        self.target = self.lights_to_bitmask(lights_str)
-        
-        # Tokens del medio: botones (excluyendo el último que es joltage)
-        self.buttons = []
-        for token in tokens[1:-1]:  # Desde el segundo hasta el penúltimo
-            if token.startswith('('):
-                positions_str = token.strip('()')
-                positions = [int(p) for p in positions_str.split(',')]
-                self.buttons.append(self.positions_to_bitmask(positions))
 
     def positions_to_bitmask(self, positions: List[int]) -> int:
         """Convert a list of positions to a bitmask."""
@@ -137,13 +124,20 @@ def main() -> None:
     input_lines = read_input(input_path)
     machines = parse_input(input_lines)
     
-    total = 0
+    # Parte 1
+    total_part1 = 0
     for i, machine in enumerate(machines):
         min_presses = machine.find_minimum_presses()
-        print(f"Machine {i}: {min_presses} presses")
-        total += min_presses
+        total_part1 += min_presses
+    print(f"Part 1: {total_part1}")
     
-    print(f"\nTotal: {total}")
+    # Parte 2
+    total_part2 = 0
+    for i, machine in enumerate(machines):
+        min_presses = machine.find_minimum_presses_part2()
+        print(f"Machine {i}: {min_presses} presses")
+        total_part2 += min_presses
+    print(f"Part 2: {total_part2}")
 
 
 if __name__ == "__main__":
