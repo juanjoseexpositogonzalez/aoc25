@@ -59,6 +59,12 @@ The repository is organized by day, with each challenge in its own directory:
 │   ├── input.txt
 │   ├── test.txt
 │   └── day10.md     # Challenge description
+├── day11/
+│   ├── main.py
+│   ├── input.txt
+│   ├── test.txt
+│   ├── test_part2.txt
+│   └── day11.md     # Challenge description
 ├── pyproject.toml   # Project configuration
 ├── uv.lock          # Dependency lock file
 └── README.md        # This file
@@ -152,6 +158,9 @@ cd day09 && python main.py
 
 # Run Day 10 solution
 cd day10 && python main.py
+
+# Run Day 11 solution
+cd day11 && python main.py
 ```
 
 ### Adding New Challenges
@@ -168,17 +177,17 @@ When starting a new day's challenge:
 
 | Day | Part 1 | Part 2 | Notes |
 |-----|:------:|:------:|-------|
-| [Day 1](day01/) | ✅ | ✅ | |
-| [Day 2](day02/) | ✅ | ✅ | |
-| [Day 3](day03/) | ✅ | ✅ | |
-| [Day 4](day04/) | ✅ | ✅ | |
-| [Day 5](day05/) | ✅ | ✅ | |
-| [Day 6](day06/) | ✅ | ✅ | |
-| [Day 7](day07/) | ✅ | ✅ | |
-| [Day 8](day08/) | ✅ | ✅ | |
-| [Day 9](day09/) | ✅ | ✅ | |
-| [Day 10](day10/) | ✅ | ✅ | |
-| Day 11 | ⬜ | ⬜ | |
+| [Day 1](day01/) | ✅ | ✅ | Circular dial rotation (modular arithmetic) |
+| [Day 2](day02/) | ✅ | ✅ | Invalid ID identification with repeated patterns |
+| [Day 3](day03/) | ✅ | ✅ | Battery optimization for maximum joltage |
+| [Day 4](day04/) | ✅ | ✅ | Grid simulation with neighborhood rules |
+| [Day 5](day05/) | ✅ | ✅ | Interval merging and fresh ingredient ranges |
+| [Day 6](day06/) | ✅ | ✅ | Parsing and mathematical expression evaluation |
+| [Day 7](day07/) | ✅ | ✅ | Tachyon beam simulation on grid |
+| [Day 8](day08/) | ✅ | ✅ | Minimum spanning tree in 3D space |
+| [Day 9](day09/) | ✅ | ✅ | Computational geometry - rectangles with corners |
+| [Day 10](day10/) | ✅ | ✅ | Linear optimization - light and counter configuration |
+| [Day 11](day11/) | ✅ | ✅ | Graph traversal - finding paths in directed graph |
 | Day 12 | ⬜ | ⬜ | |
 
 **Legend:**
