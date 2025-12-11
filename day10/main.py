@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from itertools import combinations
 from pathlib import Path
 from typing import Final, List
-from pulp import LpProblem, LpMinimize, LpVariable, lpSum, LpStatus
+from pulp import LpProblem, LpMinimize, LpVariable, lpSum, LpStatus  # type: ignore
 
 TEST_INPUT: Final[str] = "test.txt"
 REAL_INPUT: Final[str] = "input.txt"
@@ -55,10 +55,10 @@ class Machine:
             prob += lpSum(x[i] for i in range(num_buttons) if j in self.button_positions[i]) == self.joltages[j]
         
         # Resolver
-        prob.solve()
+        prob.solve()  # type: ignore
         
-        if LpStatus[prob.status] == 'Optimal':
-            return int(sum(var.varValue for var in x))
+        if LpStatus[prob.status] == 'Optimal':  # type: ignore
+            return int(sum(var.varValue for var in x))  # type: ignore
         else:
             return -1  # Sin solución
 
@@ -110,12 +110,12 @@ def read_input(path: Path) -> List[str]:
 
 def parse_input(input_lines: List[str]) -> List[Machine]:
     """Parse all machines from input."""
-    machines = []
+    machines: List[Machine] = []
     for line in input_lines:
         tokens = line.split()
         machine = Machine()
         machine.parse(tokens)
-        machines.append(machine)
+        machines.append(machine)  # type: ignore
     return machines
 
 
