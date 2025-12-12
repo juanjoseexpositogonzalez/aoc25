@@ -10,3 +10,8 @@ wheels/
 .venv
 
 aoc-grids-guide.md
+paper*.pdf
+
+# Markdown en day01..day12
+day0?/*.md
+day1[0-2]/*.md
